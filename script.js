@@ -1,5 +1,5 @@
 async function sendRequest() {
-    const callbackURL = document.getElementById('callback').value;
+    const callbackURL = "https://yash-pratap-singh.github.io/salt-api-/";
     const promptText = document.getElementById('prompt').value;
 
     const apiUrl = 'https://salt-api-prod.getsalt.ai/api/v1/deployments/c97da732-8dc6-49f7-9713-303425d4a5d9/executions/';
