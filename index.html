@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salt API Request</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Send Request to Salt API</h1>
+    
+    <div>
+        <label for="callback">Callback URL:</label>
+        <input type="text" id="callback" placeholder="Enter Callback URL">
+    </div>
+    
+    <div>
+        <label for="prompt">Prompt:</label>
+        <input type="text" id="prompt" placeholder="Enter Prompt Text">
+    </div>
+    
+    <button onclick="sendRequest()">Send Request</button>
+
+    <h3>Response:</h3>
+    <pre id="responseData"></pre>
+
+    <script src="script.js"></script>
+</body>
+</html>
