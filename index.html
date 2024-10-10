@@ -4,26 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salt API Request</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Send Request to Salt API</h1>
-    
-    <div>
-        <label for="callback">Callback URL:</label>
-        <input type="text" id="callback" placeholder="Enter Callback URL">
-    </div>
-    
-    <div>
-        <label for="prompt">Prompt:</label>
-        <input type="text" id="prompt" placeholder="Enter Prompt Text">
-    </div>
-    
-    <button onclick="sendRequest()">Send Request</button>
+    <h1>Salt API Request</h1>
 
-    <h3>Response:</h3>
-    <pre id="responseData"></pre>
+    <!-- Input for the prompt text -->
+    <label for="prompt">Enter your prompt:</label>
+    <input type="text" id="prompt" placeholder="Enter prompt here...">
 
-    <script src="script.js"></script>
+    <!-- Button to trigger the API request -->
+    <button id="sendRequest">Send API Request</button>
+
+    <!-- Display API response -->
+    <div id="response" style="margin-top: 20px;"></div>
+
+    <script>
+        // Function to send the API request when the button is clicked
+        document.getElementById('sendRequest').addEventListener('click', function() {
+            // Get the value of the prompt input
+            const promptText = document.getElementById('prompt').value;
+
+            // Check if the prompt text is not empty
+            if (!promptText) {
+                alert('Please enter a prompt');
+                return;
+            }
+
+            // API request URL
+            const apiUrl = "https://salt-api-prod.getsalt.ai/api/v1/deployments/c97da732-8dc6-49f7-9713-303425d4a5d9/executions/";
+
+            // Callback URL (for now it's your hosted GitHub Pages URL)
+            const callbackUrl = "https://yash-pratap-singh.github.io/salt-api-/";
+
+            // Prepare the payload
+            const payload = {
+                "callback": callbackUrl,
+                "workflow_input": {
+                    "Prompt": {
+                        "value": promptText,
+                        "value_type": "RAW"
+                    }
+                }
+            };
+
+            // Send the API request using fetch
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())  // Convert the response to JSON
+            .then(data => {
+                // Display the response in the div
+                document.getElementById('response').innerText = `Response: ${JSON.stringify(data)}`;
+            })
+            .catch(error => {
+                // Handle any errors
+                console.error('Error:', error);
+                document.getElementById('response').innerText = `Error: ${error}`;
+            });
+        });
+    </script>
 </body>
 </html>
